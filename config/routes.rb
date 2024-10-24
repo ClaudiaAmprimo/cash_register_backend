@@ -5,4 +5,10 @@ Rails.application.routes.draw do
   # root "articles#index"
 
   resources :products, only: [:index]
+
+  resources :carts, only: [:show] do
+    post :add_product, on: :collection
+    delete :remove_product, on: :collection
+  end
+  get '/carts', to: 'carts#show'
 end
