@@ -40,8 +40,13 @@ class CartsController < ApplicationController
   private
 
   def set_cart
+    Rails.logger.info "Session Cart ID: #{session[:cart_id]}"
     @cart = Cart.find_by(id: session[:cart_id])
-    @cart ||= Cart.create
+
+    unless @cart
+      @cart = Cart.create
+      session[:cart_id] = @cart.id
+    end
   end
 
   def format_cart_items(items)
