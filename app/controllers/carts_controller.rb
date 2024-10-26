@@ -53,6 +53,7 @@ class CartsController < ApplicationController
     items.map do |item|
       {
         product_code: item.product.code,
+        name: item.product.name,
         quantity: item.quantity,
         total_price: item.total_price.to_f
       }
